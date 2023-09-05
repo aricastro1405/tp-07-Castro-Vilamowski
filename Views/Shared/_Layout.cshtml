@@ -7,15 +7,23 @@
         <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     </head>
     <body>
-        <header style="position:fixed; top: 0; margin: 10px 0px 20px 0px;">
-            Encabezado TP XX
-        </header>
+       <header> <!--NAVBAR-->
+      <nav class="navbar">
+        <div>
+          <a class="navbar-brand" href='@Url.Action("Index")'>
+            <img src="/imagenes/preguntadort.jpg" alt="Logo" class="d-inline-block align-text-top log"></a>
+            <a class="navbar-brand"  href='@Url.Action("ConfigurarJuego")'>CONFIGURACIÓN</a>
+          
+        </div>
+    </nav> 
+    <!--NAVBAR-->
+    </header>
         <div style="padding:20px 10px 0px 10px;">
             @RenderBody()
         </div>
 
         <footer>
-                &copy; @DateTime.Now.Year - Taller de Programación - TPXX
+                <p>Copyright © 2023 Castro Vilamowski</p>
         </footer>
         <script src="~/js/site.js" asp-append-version="true"></script>
         @await RenderSectionAsync("Scripts", required: false)

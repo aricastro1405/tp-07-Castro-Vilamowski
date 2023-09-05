@@ -1,0 +1,38 @@
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>PreguntadORT</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="icon" type="image/png" href="imagenes/logo2.jpg">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+  </head>
+ <body>
+ <div class="cuadradoconf">
+      <h1>CONFIGURACIÓN</h1>
+              <form method = "get" action = '@Url.Action("Comenzar")'>
+                <p>
+                NOMBRE DE USUARIO:   <input class="campo" type = "text" name = "username" required><br>
+                    DIFICULTAD: 
+                    <select class="campo" name = "IdDificultad" required>
+                        @foreach(Dificultad item in ViewBag.listaDificultades){
+                            <option value = "@item.IdDificultad">@item.Nombre</option>
+                        }
+                        <option value="-1">Todas</option>
+                    </select><br>
+                    <p class="campo" >SELECCIONE LA CATEGORÍA:</p><br>
+                    <div class="categories">
+                    
+                        @foreach(Categoria item in ViewBag.listaCategorias){
+                            <input id = "cat_@item.Nombre" class="categorias" type = "radio" name = "IdCategoria" value = "@item.IdCategoria" required>
+                            <label for = "cat_@item.Nombre">
+                                <img class="@item.Nombre"src="/imagenes/@item.Foto">
+                            </label>
+
+                        }
+                        <option value="-1">Todas</option>
+                  </div>
+              </p> 
+                <input class="changing-button" type = "submit" value = "COMENZAR">
+              </form>
+            </div>
+    </body>

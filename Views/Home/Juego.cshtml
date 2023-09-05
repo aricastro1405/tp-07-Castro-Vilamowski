@@ -1,0 +1,34 @@
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>PreguntadORT</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="icon" type="image/png" href="imagenes/logo2.jpg">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+  </head> 
+      <!--PREGUNTA-->
+      <section class="pregunta">
+      <div class="card mb-3">
+        <div class="card-body">
+          <h5 class="card-title">@ViewBag.preg.Enunciado</h5>
+        </div>
+        <img src="/imagenes/@ViewBag.preg.Foto">
+        <div class="respuesta">
+            <form method = "get" action = '@Url.Action("VerificarRespuesta")'>
+            <input type="hidden" name="idPregunta" value="@ViewBag.preg.IdPregunta">
+             <div class="categories">
+          @foreach(Respuesta item in ViewBag.rtas){
+        <input id = "cat_@item.Contenido" class="categorias" type = "radio" name = "IdRespuesta" value = "@item.IdRespuesta" required>
+                            <label for = "cat_@item.Contenido">
+                            <p>@item.Contenido</p>
+                            </label>
+          }
+                
+          
+      </div>
+      <input class="changing-button" type = "submit" value = "COMENZAR">
+      </form>
+      </div>
+      </div>
+    </section>
+    <!--PREGUNTA-->

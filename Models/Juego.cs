@@ -8,6 +8,8 @@ public static class Juego{
         _username = "";
         _puntajeActual = 0;
         _cantidadPreguntasCorrectas = 0;
+        _preguntas = new List<Pregunta>();
+        _respuestas = new List<Respuesta>();
     }
     public static List<Categoria> ObtenerCategorias(){
         return BD.ObtenerCategorias();
@@ -18,35 +20,42 @@ public static class Juego{
     public static void CargarPartida(string username, int dificultad, int categoria){
         _preguntas = BD.ObtenerPreguntas(dificultad, categoria);
         _respuestas = BD.ObtenerRespuestas(_preguntas);
+        _username=username;
     }
-    public static List<Pregunta> ObtenerProximaPregunta(){
-        int cantidad = BD._ListadoPreguntas.Count;
+    public static Pregunta ObtenerProximaPregunta(){
+        int cantidad = _preguntas.Count;
         Random rnd = new Random();
         int num = rnd.Next(0, cantidad);
-        return _ListadoPreguntas[num];
+        if(cantidad==0){
+            _preguntas[num]=null;
+        }
+        return _preguntas[num];
     }
     public static List<Respuesta> ObtenerProximasRespuestas(int idPregunta){
-       foreach(rta Respuesta in _respuestas){
+       List<Respuesta> _respuestasPregunta = new List<Respuesta>();
+       foreach(Respuesta rta  in _respuestas){
             if(rta.IdPregunta==idPregunta){
-                _respuestas.Add(rta);
+                _respuestasPregunta.Add(rta);
             }
        } 
-       return _respuestas;
+       return _respuestasPregunta;
     }
     public static bool VerificarRespuesta(int idPregunta, int idRespuesta){
-        bool correcta = false;
-        foreach(rta Respuesta in _respuestas){
+        bool Correcta = false;
+        foreach(Respuesta rta  in _respuestas){
             if(rta.IdRespuesta == idRespuesta){
-                correcta=rta.Correcta == true;
+                Correcta=(rta.correcta == true);
             }
         }
-        if(correcta){
+        if(Correcta){
             _puntajeActual += 5;
             _cantidadPreguntasCorrectas++;
-            foreach(preg Pregunta in _preguntas){
-                if(preg.IdPregunta == idPregunta) _preguntas.Remove(preg);
+            Pregunta remover = null;
+            foreach(Pregunta preg  in _preguntas){
+                if(preg.IdPregunta == idPregunta) remover = preg;
             }
+            _preguntas.Remove(remover);
         }
-       return correcta;
+       return Correcta;
     }
 }

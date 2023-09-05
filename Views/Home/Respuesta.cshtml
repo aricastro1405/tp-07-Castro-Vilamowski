@@ -1,0 +1,25 @@
+@if(ViewBag.rtaCorrecta){
+    <div class="centrar">
+    <div class="verde">
+    <h1>CORRECTO!</h1>
+    <img src="/imagenes/correcto.png">
+    <h4>WOW! QUÉ VELOCIDAD!</h4>
+    <p>+5 PUNTOS</p>
+    <form method = "get" action = '@Url.Action("Jugar")'>
+    <button class="btn btn-primary">SEGUIR JUGANDO</button>
+    </form>
+  </div>
+  </div>
+}
+else{
+    <div class="centrar">
+    <div class="rojo">
+    <h1>INCORRECTO</h1>
+    <img class="cruz" src="/imagenes/incorrecto.png">
+    <h4>TRANQUILO, ERA DIFÍCIL...!</h4>
+    <form method = "get" action = '@Url.Action("Jugar")'>
+    <button class="btn btn-primary">SEGUIR JUGANDO</button>
+    </form>
+  </div>
+  </div>
+}
